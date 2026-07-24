@@ -1,0 +1,49 @@
+[project]
+name = "click-script"
+version = "0.1.0"
+description = "Windows image-recognition click workflow editor"
+readme = "README.md"
+authors = [
+    { name = "yangfc", email = "1263578411@qq.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "mss>=10.2.0",
+    "numpy>=2.5.1",
+    "opencv-python>=5.0.0.93",
+    "pillow>=12.3.0",
+    "pynput>=1.8.2",
+    "pyside6>=6.11.1",
+]
+
+[project.scripts]
+click-script = "click_script:main"
+
+[build-system]
+requires = ["uv_build>=0.11.25,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "BLE", "S", "UP"]
+ignore = ["S101", "S311"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+qt_api = "pyside6"
+
+[tool.mypy]
+python_version = "3.12"
+check_untyped_defs = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+
+[dependency-groups]
+dev = [
+    "mypy>=2.3.0",
+    "pytest>=9.1.1",
+    "pytest-qt>=4.5.0",
+    "ruff>=0.16.0",
+]

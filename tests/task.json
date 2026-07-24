@@ -1,0 +1,151 @@
+{
+  "name": "9",
+  "id": "2ff447ee-7b7c-4327-a74b-6d287dab37da",
+  "schema_version": 1,
+  "targets": [
+    {
+      "id": "5c662004-e4a7-41d3-b3f0-32b6349a82f8",
+      "name": "挑战",
+      "path": "images\\5c662004-e4a7-41d3-b3f0-32b6349a82f8.png",
+      "width": 108,
+      "height": 92,
+      "sha256": "9011e782625bf2c064344d7bcde0684790b9dbcaa8e9f5a5ae11e20e4c8a412f"
+    },
+    {
+      "id": "941242b8-aa5e-426a-8b70-c28242b4c836",
+      "name": "继续",
+      "path": "images\\941242b8-aa5e-426a-8b70-c28242b4c836.png",
+      "width": 182,
+      "height": 177,
+      "sha256": "0953b6fb2b1f09643325d4ba2bb569308b9b64e5d7d8f56821b4a49ff4c5630d"
+    },
+    {
+      "id": "399235ea-82e7-4460-bbbb-03dbcfe5b5e9",
+      "name": "继续1",
+      "path": "images\\399235ea-82e7-4460-bbbb-03dbcfe5b5e9.png",
+      "width": 258,
+      "height": 164,
+      "sha256": "68395560fb285d1beec68e57155b30ebaa76c46a1781cb33d9af6828ab5909a0"
+    }
+  ],
+  "steps": [
+    {
+      "id": "9c9a420f-9b43-4a8d-9e7e-a41113a6dd47",
+      "name": "点击 挑战",
+      "target_image_id": "5c662004-e4a7-41d3-b3f0-32b6349a82f8",
+      "enabled": true,
+      "confidence_threshold": 0.88,
+      "search_timeout_ms": 5000,
+      "poll_interval_ms": 200,
+      "before_click_delay_ms": {
+        "minimum": 510,
+        "maximum": 9310
+      },
+      "after_click_delay_ms": {
+        "minimum": 300,
+        "maximum": 700
+      },
+      "failure_policy": "skip",
+      "retry_count": 2,
+      "retry_delay_ms": 500,
+      "search_region": {
+        "mode": "rectangle",
+        "rect": {
+          "left": 1576,
+          "top": 50,
+          "width": 976,
+          "height": 1308
+        }
+      }
+    },
+    {
+      "id": "f82bef4c-b3e0-4238-b0ec-8cecc8b0d98a",
+      "name": "点击 继续",
+      "target_image_id": "941242b8-aa5e-426a-8b70-c28242b4c836",
+      "enabled": true,
+      "confidence_threshold": 0.7,
+      "search_timeout_ms": 5000,
+      "poll_interval_ms": 200,
+      "before_click_delay_ms": {
+        "minimum": 560,
+        "maximum": 9400
+      },
+      "after_click_delay_ms": {
+        "minimum": 300,
+        "maximum": 700
+      },
+      "failure_policy": "skip",
+      "retry_count": 2,
+      "retry_delay_ms": 500,
+      "search_region": {
+        "mode": "rectangle",
+        "rect": {
+          "left": 1567,
+          "top": 49,
+          "width": 984,
+          "height": 1257
+        }
+      }
+    },
+    {
+      "id": "73b2643d-47dc-4990-9687-0c0bf7cf6fcb",
+      "name": "点击 继续1",
+      "target_image_id": "399235ea-82e7-4460-bbbb-03dbcfe5b5e9",
+      "enabled": true,
+      "confidence_threshold": 0.88,
+      "search_timeout_ms": 1000,
+      "poll_interval_ms": 200,
+      "before_click_delay_ms": {
+        "minimum": 80,
+        "maximum": 220
+      },
+      "after_click_delay_ms": {
+        "minimum": 300,
+        "maximum": 700
+      },
+      "failure_policy": "skip",
+      "retry_count": 1,
+      "retry_delay_ms": 500,
+      "search_region": {
+        "mode": "rectangle",
+        "rect": {
+          "left": 1569,
+          "top": 48,
+          "width": 986,
+          "height": 1240
+        }
+      }
+    }
+  ],
+  "repeat_count": null,
+  "round_delay_ms": {
+    "minimum": 1000,
+    "maximum": 6580
+  },
+  "startup_countdown_ms": 3000,
+  "natural_click": {
+    "minimum_move_duration_ms": 250,
+    "maximum_move_duration_ms": 1200,
+    "pixels_per_second": 1200.0,
+    "speed_variation_ratio": 0.25,
+    "curve_strength_ratio": 0.12,
+    "path_segments_per_second": 80,
+    "safe_margin_ratio_x": 0.06,
+    "safe_margin_ratio_y": 0.05,
+    "click_sigma_ratio_x": 0.17,
+    "click_sigma_ratio_y": 0.14,
+    "long_wait_probability": 0.1,
+    "wait_bias_power": 6.0,
+    "idle_motion_probability": 0.0,
+    "idle_motion_radius_px": 32,
+    "idle_motion_max_count": 2,
+    "arrival_pause_ms": {
+      "minimum": 60,
+      "maximum": 180
+    },
+    "press_duration_ms": {
+      "minimum": 40,
+      "maximum": 120
+    }
+  }
+}
