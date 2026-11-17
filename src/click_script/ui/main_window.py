@@ -71,6 +71,7 @@ class MainWindow(QMainWindow):
         self._hotkeys: keyboard.GlobalHotKeys | None = None
 
         self._build_ui()
+        self._apply_modern_theme()
         self._connect_signals()
         self._refresh_all()
         self._start_hotkey_listener()
@@ -106,6 +107,46 @@ class MainWindow(QMainWindow):
 
         self.setStatusBar(QStatusBar())
         self.statusBar().showMessage("就绪")
+
+    def _apply_modern_theme(self) -> None:
+        self.setStyleSheet(
+            """
+            QMainWindow, QWidget { background: #f5f7fb; color: #172033; }
+            QToolBar { background: #ffffff; border: 0; border-bottom: 1px solid #e5e9f2;
+                       spacing: 6px; padding: 8px 12px; }
+            QToolButton { border: 0; border-radius: 7px; padding: 7px 12px; }
+            QToolButton:hover { background: #eef3ff; color: #315bd6; }
+            QGroupBox { background: #ffffff; border: 1px solid #e2e7f0; border-radius: 12px;
+                        margin-top: 16px; padding: 16px 12px 12px; font-weight: 600; }
+            QGroupBox::title { subcontrol-origin: margin; left: 14px; padding: 0 5px;
+                               color: #344054; }
+            QLineEdit, QSpinBox, QDoubleSpinBox, QComboBox, QTextEdit, QListWidget {
+                background: #ffffff; border: 1px solid #d8deea; border-radius: 8px;
+                padding: 7px; selection-background-color: #4f7cff;
+            }
+            QLineEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus, QComboBox:focus,
+            QTextEdit:focus, QListWidget:focus { border: 1px solid #4f7cff; }
+            QListWidget::item { border-radius: 7px; padding: 8px; margin: 2px; }
+            QListWidget::item:selected { background: #e9efff; color: #315bd6; }
+            QPushButton { background: #edf1f7; border: 0; border-radius: 8px;
+                          padding: 8px 14px; font-weight: 500; }
+            QPushButton:hover { background: #dfe7f5; }
+            QPushButton:pressed { background: #d2dced; }
+            QPushButton:disabled { color: #98a2b3; background: #f1f3f6; }
+            QCheckBox { spacing: 7px; }
+            QStatusBar { background: #ffffff; border-top: 1px solid #e5e9f2; }
+            QSplitter::handle { background: transparent; width: 8px; }
+            """
+        )
+        self.start_button.setStyleSheet(
+            "QPushButton { background:#4f7cff; color:white; font-weight:600; }"
+            "QPushButton:hover { background:#3f6de8; }"
+            "QPushButton:disabled { background:#b9c7ea; color:#f5f7fb; }"
+        )
+        self.stop_button.setStyleSheet(
+            "QPushButton { background:#fff0f0; color:#d92d20; }"
+            "QPushButton:hover { background:#ffe0e0; }"
+        )
 
     def _build_target_panel(self) -> QWidget:
         panel = QGroupBox("目标图片")
@@ -172,6 +213,8 @@ class MainWindow(QMainWindow):
         self.failure_policy.addItem("重试", FailurePolicy.RETRY)
         self.retry_count = self._spin(0, 20, 1)
         self.retry_delay = self._spin(0, 30_000, 50, " ms")
+        self.click_all_matches = QCheckBox("点击画面中的全部匹配")
+        self.infinite_retry = QCheckBox("未识别时无限重试")
         self.region_label = QLabel("全屏")
         self.select_region_button = QPushButton("框选搜索区域")
         self.clear_region_button = QPushButton("恢复全屏")
@@ -191,6 +234,8 @@ class MainWindow(QMainWindow):
         form.addRow("失败处理", self.failure_policy)
         form.addRow("重试次数", self.retry_count)
         form.addRow("重试间隔", self.retry_delay)
+        form.addRow(self.click_all_matches)
+        form.addRow(self.infinite_retry)
         form.addRow("搜索范围", self.region_label)
         form.addRow(region_row)
         return panel
@@ -288,6 +333,8 @@ class MainWindow(QMainWindow):
             self.failure_policy,
             self.retry_count,
             self.retry_delay,
+            self.click_all_matches,
+            self.infinite_retry,
         ):
             if isinstance(control, QLineEdit):
                 control.textEdited.connect(self._update_selected_step)
@@ -515,6 +562,8 @@ class MainWindow(QMainWindow):
             self.failure_policy.setCurrentIndex(max(0, index))
             self.retry_count.setValue(step.retry_count)
             self.retry_delay.setValue(step.retry_delay_ms)
+            self.click_all_matches.setChecked(step.click_all_matches)
+            self.infinite_retry.setChecked(step.infinite_retry)
             self._show_region(step.search_region)
         else:
             self.step_name.clear()
@@ -541,6 +590,8 @@ class MainWindow(QMainWindow):
         step.failure_policy = self.failure_policy.currentData()
         step.retry_count = self.retry_count.value()
         step.retry_delay_ms = self.retry_delay.value()
+        step.click_all_matches = self.click_all_matches.isChecked()
+        step.infinite_retry = self.infinite_retry.isChecked()
         self._mark_dirty()
         self._refresh_steps(step.id)
 

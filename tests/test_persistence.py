@@ -23,6 +23,8 @@ def test_task_round_trip_copies_images(tmp_path: Path) -> None:
                 name="点击确认",
                 target_image_id=target.id,
                 failure_policy=FailurePolicy.RETRY,
+                click_all_matches=True,
+                infinite_retry=True,
             )
         ],
     )
@@ -36,6 +38,8 @@ def test_task_round_trip_copies_images(tmp_path: Path) -> None:
     assert Path(loaded.targets[0].path).is_file()
     assert Path(loaded.targets[0].path).parent == project / "images"
     assert loaded.steps[0].failure_policy == FailurePolicy.RETRY
+    assert loaded.steps[0].click_all_matches
+    assert loaded.steps[0].infinite_retry
     assert loaded.round_delay_ms == IntRange(1500, 4200)
     loaded.validate()
 

@@ -42,3 +42,25 @@ def test_template_larger_than_frame_is_not_found(tmp_path: Path) -> None:
 
     assert not result.found
     assert result.bounds is None
+
+
+def test_match_all_returns_distinct_global_matches(tmp_path: Path) -> None:
+    template = make_pattern()
+    template_path = tmp_path / "target.png"
+    cv2.imwrite(str(template_path), template)
+    screen = np.zeros((180, 280, 3), dtype=np.uint8)
+    screen[20:50, 30:70] = template
+    screen[100:130, 190:230] = template
+    frame = CapturedFrame(screen, Rect(-100, 50, 280, 180))
+
+    results = TemplateMatcher().match_all(frame, str(template_path), 0.95)
+
+    assert len(results) == 2
+    assert sorted(
+        (result.bounds.left, result.bounds.top, result.bounds.width, result.bounds.height)
+        for result in results
+        if result.bounds
+    ) == [
+        (-70, 70, 40, 30),
+        (90, 150, 40, 30),
+    ]

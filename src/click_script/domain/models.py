@@ -159,6 +159,8 @@ class ClickStep:
     failure_policy: FailurePolicy = FailurePolicy.STOP
     retry_count: int = 1
     retry_delay_ms: int = 500
+    click_all_matches: bool = False
+    infinite_retry: bool = False
     search_region: SearchRegion = field(default_factory=SearchRegion)
 
     def validate(self, target_ids: set[str]) -> None:

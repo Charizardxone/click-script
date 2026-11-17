@@ -118,9 +118,13 @@ class TaskWorker(QObject):
         template_path: str,
         mouse: NaturalMouse,
     ) -> StepOutcome:
-        attempts = 1 + (step.retry_count if step.failure_policy == FailurePolicy.RETRY else 0)
+        attempts = None if step.infinite_retry else (
+            1 + (step.retry_count if step.failure_policy == FailurePolicy.RETRY else 0)
+        )
         best_confidence = 0.0
-        for attempt in range(1, attempts + 1):
+        attempt = 0
+        while attempts is None or attempt < attempts:
+            attempt += 1
             result = self._find_target(step, template_path)
             best_confidence = max(best_confidence, result.confidence)
             if result.found and result.bounds:
@@ -129,22 +133,36 @@ class TaskWorker(QObject):
                     mouse=mouse,
                     allow_idle_motion=True,
                 )
-                refreshed = self._matcher.match(
-                    self._capture.capture(step.search_region),
-                    template_path,
-                    step.confidence_threshold,
+                frame = self._capture.capture(step.search_region)
+                refreshed_matches = (
+                    self._matcher.match_all(frame, template_path, step.confidence_threshold)
+                    if step.click_all_matches
+                    else [self._matcher.match(frame, template_path, step.confidence_threshold)]
                 )
-                best_confidence = max(best_confidence, refreshed.confidence)
-                if not refreshed.found or refreshed.bounds is None:
+                refreshed_matches = [
+                    match for match in refreshed_matches if match.found and match.bounds is not None
+                ]
+                if refreshed_matches:
+                    best_confidence = max(
+                        best_confidence,
+                        max(match.confidence for match in refreshed_matches),
+                    )
+                if not refreshed_matches:
                     self.log_message.emit(f"{step.name}：点击前复核失败，不执行点击")
-                    if attempt < attempts:
+                    if attempts is None or attempt < attempts:
                         self._wait_range(IntRange(step.retry_delay_ms, step.retry_delay_ms))
                     continue
-                point = mouse.click(
-                    refreshed.bounds,
-                    self.cancel_event,
-                    self.pause_event,
-                )
+                clicked: list[str] = []
+                for match in refreshed_matches:
+                    self._checkpoint()
+                    if match.bounds is None:
+                        continue
+                    point = mouse.click(
+                        match.bounds,
+                        self.cancel_event,
+                        self.pause_event,
+                    )
+                    clicked.append(f"({point.x}, {point.y})")
                 self._wait_range(
                     step.after_click_delay_ms,
                     mouse=mouse,
@@ -153,11 +171,12 @@ class TaskWorker(QObject):
                 return StepOutcome(
                     True,
                     (
-                        f"置信度 {refreshed.confidence:.3f}，"
-                        f"点击 ({point.x}, {point.y})，识别 {refreshed.elapsed_ms:.0f} ms"
+                        f"找到并点击 {len(refreshed_matches)} 个匹配，"
+                        f"最高置信度 {max(item.confidence for item in refreshed_matches):.3f}，"
+                        f"位置 {', '.join(clicked)}"
                     ),
                 )
-            if attempt < attempts:
+            if attempts is None or attempt < attempts:
                 self.log_message.emit(f"{step.name}：第 {attempt} 次未找到，准备重试")
                 self._wait_range(IntRange(step.retry_delay_ms, step.retry_delay_ms))
         return StepOutcome(

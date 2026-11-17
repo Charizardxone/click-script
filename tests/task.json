@@ -1,99 +1,57 @@
 {
-  "name": "9",
-  "id": "2ff447ee-7b7c-4327-a74b-6d287dab37da",
+  "name": "未命名任务",
+  "id": "212dfd36-2b18-4f1c-804f-3b069099dade",
   "schema_version": 1,
   "targets": [
     {
-      "id": "5c662004-e4a7-41d3-b3f0-32b6349a82f8",
-      "name": "挑战",
-      "path": "images\\5c662004-e4a7-41d3-b3f0-32b6349a82f8.png",
-      "width": 108,
-      "height": 92,
-      "sha256": "9011e782625bf2c064344d7bcde0684790b9dbcaa8e9f5a5ae11e20e4c8a412f"
+      "id": "b29d44d4-66b9-4090-b924-34a107f6f202",
+      "name": "搜寻",
+      "path": "images\\b29d44d4-66b9-4090-b924-34a107f6f202.png",
+      "width": 120,
+      "height": 68,
+      "sha256": "bf36b822a5432fc4015600e1d0d115101df6487bbd72318f842626f243a5d3c9"
     },
     {
-      "id": "941242b8-aa5e-426a-8b70-c28242b4c836",
-      "name": "继续",
-      "path": "images\\941242b8-aa5e-426a-8b70-c28242b4c836.png",
-      "width": 182,
-      "height": 177,
-      "sha256": "0953b6fb2b1f09643325d4ba2bb569308b9b64e5d7d8f56821b4a49ff4c5630d"
+      "id": "c2e0867b-b07a-4f60-a9d1-0a60cb6030aa",
+      "name": "开始挑战",
+      "path": "images\\c2e0867b-b07a-4f60-a9d1-0a60cb6030aa.png",
+      "width": 99,
+      "height": 115,
+      "sha256": "2c5f740b10781045ea86fc2b6cf227ccaf8c1f262988161957f35f5dea7b962e"
     },
     {
-      "id": "399235ea-82e7-4460-bbbb-03dbcfe5b5e9",
-      "name": "继续1",
-      "path": "images\\399235ea-82e7-4460-bbbb-03dbcfe5b5e9.png",
-      "width": 258,
-      "height": 164,
-      "sha256": "68395560fb285d1beec68e57155b30ebaa76c46a1781cb33d9af6828ab5909a0"
+      "id": "cb3e5942-69a7-4541-95b5-ad9c3a7d1018",
+      "name": "胜利",
+      "path": "images\\cb3e5942-69a7-4541-95b5-ad9c3a7d1018.png",
+      "width": 625,
+      "height": 227,
+      "sha256": "ff25cb60e3eb6ecc1f3ffa47b8f34c349e136f4fc58dadfd191fc5fd9f645528"
+    },
+    {
+      "id": "e1a88b69-37a6-4259-934c-d5b74cff287f",
+      "name": "结束",
+      "path": "images\\e1a88b69-37a6-4259-934c-d5b74cff287f.png",
+      "width": 620,
+      "height": 223,
+      "sha256": "d53bedd69a31566a27d4f89456a16b09abd0d52abf828c66a8f64bc162ad112a"
+    },
+    {
+      "id": "ff3a365a-4093-4686-a335-42e193a2b1eb",
+      "name": "准备",
+      "path": "images\\ff3a365a-4093-4686-a335-42e193a2b1eb.png",
+      "width": 76,
+      "height": 68,
+      "sha256": "9254baccacb01033e310039270a862265a34de49b41ffdc35b009d503271adf6"
     }
   ],
   "steps": [
     {
-      "id": "9c9a420f-9b43-4a8d-9e7e-a41113a6dd47",
-      "name": "点击 挑战",
-      "target_image_id": "5c662004-e4a7-41d3-b3f0-32b6349a82f8",
+      "id": "fd84a452-9c97-4bbc-8001-f8ed8b6eea74",
+      "name": "点击 搜寻",
+      "target_image_id": "b29d44d4-66b9-4090-b924-34a107f6f202",
       "enabled": true,
       "confidence_threshold": 0.88,
       "search_timeout_ms": 5000,
-      "poll_interval_ms": 200,
-      "before_click_delay_ms": {
-        "minimum": 510,
-        "maximum": 9310
-      },
-      "after_click_delay_ms": {
-        "minimum": 300,
-        "maximum": 700
-      },
-      "failure_policy": "skip",
-      "retry_count": 2,
-      "retry_delay_ms": 500,
-      "search_region": {
-        "mode": "rectangle",
-        "rect": {
-          "left": 1576,
-          "top": 50,
-          "width": 976,
-          "height": 1308
-        }
-      }
-    },
-    {
-      "id": "f82bef4c-b3e0-4238-b0ec-8cecc8b0d98a",
-      "name": "点击 继续",
-      "target_image_id": "941242b8-aa5e-426a-8b70-c28242b4c836",
-      "enabled": true,
-      "confidence_threshold": 0.7,
-      "search_timeout_ms": 5000,
-      "poll_interval_ms": 200,
-      "before_click_delay_ms": {
-        "minimum": 560,
-        "maximum": 9400
-      },
-      "after_click_delay_ms": {
-        "minimum": 300,
-        "maximum": 700
-      },
-      "failure_policy": "skip",
-      "retry_count": 2,
-      "retry_delay_ms": 500,
-      "search_region": {
-        "mode": "rectangle",
-        "rect": {
-          "left": 1567,
-          "top": 49,
-          "width": 984,
-          "height": 1257
-        }
-      }
-    },
-    {
-      "id": "73b2643d-47dc-4990-9687-0c0bf7cf6fcb",
-      "name": "点击 继续1",
-      "target_image_id": "399235ea-82e7-4460-bbbb-03dbcfe5b5e9",
-      "enabled": true,
-      "confidence_threshold": 0.88,
-      "search_timeout_ms": 1000,
       "poll_interval_ms": 200,
       "before_click_delay_ms": {
         "minimum": 80,
@@ -106,21 +64,142 @@
       "failure_policy": "skip",
       "retry_count": 1,
       "retry_delay_ms": 500,
+      "click_all_matches": true,
+      "infinite_retry": false,
       "search_region": {
         "mode": "rectangle",
         "rect": {
-          "left": 1569,
-          "top": 48,
-          "width": 986,
-          "height": 1240
+          "left": 1566,
+          "top": 25,
+          "width": 989,
+          "height": 1278
+        }
+      }
+    },
+    {
+      "id": "ce2f8547-97c7-4a65-b62b-fbf0f42dd8a0",
+      "name": "点击 开始挑战",
+      "target_image_id": "c2e0867b-b07a-4f60-a9d1-0a60cb6030aa",
+      "enabled": true,
+      "confidence_threshold": 0.88,
+      "search_timeout_ms": 5000,
+      "poll_interval_ms": 200,
+      "before_click_delay_ms": {
+        "minimum": 80,
+        "maximum": 220
+      },
+      "after_click_delay_ms": {
+        "minimum": 300,
+        "maximum": 700
+      },
+      "failure_policy": "skip",
+      "retry_count": 1,
+      "retry_delay_ms": 500,
+      "click_all_matches": true,
+      "infinite_retry": false,
+      "search_region": {
+        "mode": "rectangle",
+        "rect": {
+          "left": 1579,
+          "top": 49,
+          "width": 968,
+          "height": 1239
+        }
+      }
+    },
+    {
+      "id": "fe643723-8b0a-4544-8030-7f634e8117aa",
+      "name": "点击 准备",
+      "target_image_id": "ff3a365a-4093-4686-a335-42e193a2b1eb",
+      "enabled": true,
+      "confidence_threshold": 0.88,
+      "search_timeout_ms": 5000,
+      "poll_interval_ms": 200,
+      "before_click_delay_ms": {
+        "minimum": 80,
+        "maximum": 220
+      },
+      "after_click_delay_ms": {
+        "minimum": 300,
+        "maximum": 700
+      },
+      "failure_policy": "skip",
+      "retry_count": 1,
+      "retry_delay_ms": 500,
+      "click_all_matches": true,
+      "infinite_retry": false,
+      "search_region": {
+        "mode": "full_desktop",
+        "rect": null
+      }
+    },
+    {
+      "id": "14ee5190-5883-448b-93e1-c0d81371a4fe",
+      "name": "点击 胜利",
+      "target_image_id": "cb3e5942-69a7-4541-95b5-ad9c3a7d1018",
+      "enabled": true,
+      "confidence_threshold": 0.88,
+      "search_timeout_ms": 5000,
+      "poll_interval_ms": 200,
+      "before_click_delay_ms": {
+        "minimum": 80,
+        "maximum": 220
+      },
+      "after_click_delay_ms": {
+        "minimum": 300,
+        "maximum": 700
+      },
+      "failure_policy": "skip",
+      "retry_count": 1,
+      "retry_delay_ms": 500,
+      "click_all_matches": true,
+      "infinite_retry": false,
+      "search_region": {
+        "mode": "rectangle",
+        "rect": {
+          "left": 1579,
+          "top": 52,
+          "width": 970,
+          "height": 1226
+        }
+      }
+    },
+    {
+      "id": "cffec634-ea1d-48db-b83d-1947aafb744c",
+      "name": "点击 结束",
+      "target_image_id": "e1a88b69-37a6-4259-934c-d5b74cff287f",
+      "enabled": true,
+      "confidence_threshold": 0.88,
+      "search_timeout_ms": 5000,
+      "poll_interval_ms": 200,
+      "before_click_delay_ms": {
+        "minimum": 80,
+        "maximum": 220
+      },
+      "after_click_delay_ms": {
+        "minimum": 300,
+        "maximum": 700
+      },
+      "failure_policy": "skip",
+      "retry_count": 1,
+      "retry_delay_ms": 500,
+      "click_all_matches": true,
+      "infinite_retry": false,
+      "search_region": {
+        "mode": "rectangle",
+        "rect": {
+          "left": 1586,
+          "top": 57,
+          "width": 969,
+          "height": 1229
         }
       }
     }
   ],
-  "repeat_count": null,
+  "repeat_count": 900,
   "round_delay_ms": {
     "minimum": 1000,
-    "maximum": 6580
+    "maximum": 3000
   },
   "startup_countdown_ms": 3000,
   "natural_click": {
@@ -130,13 +209,13 @@
     "speed_variation_ratio": 0.25,
     "curve_strength_ratio": 0.12,
     "path_segments_per_second": 80,
-    "safe_margin_ratio_x": 0.06,
-    "safe_margin_ratio_y": 0.05,
-    "click_sigma_ratio_x": 0.17,
-    "click_sigma_ratio_y": 0.14,
+    "safe_margin_ratio_x": 0.2,
+    "safe_margin_ratio_y": 0.2,
+    "click_sigma_ratio_x": 0.12,
+    "click_sigma_ratio_y": 0.12,
     "long_wait_probability": 0.1,
     "wait_bias_power": 6.0,
-    "idle_motion_probability": 0.0,
+    "idle_motion_probability": 0.4,
     "idle_motion_radius_px": 32,
     "idle_motion_max_count": 2,
     "arrival_pause_ms": {
